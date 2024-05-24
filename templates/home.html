@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Project</title>
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+
+    <style>
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #6c757d;
+            --bg-color: #f8f9fa;
+            --text-color: #343a40;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        #company-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .company-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+            padding: 1rem;
+            background-color: white;
+        }
+
+        .company-logo {
+            width: 100px;
+            /* or any size you want */
+            height: 100px;
+            /* should be equal to width */
+            border-radius: 50%;
+            /* this makes it round */
+            object-fit: cover;
+            /* this prevents distortion */
+        }
+
+        .company-name {
+            margin: 1rem 0;
+        }
+
+        .explore-btn {
+            margin-top: auto;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* .explore-btn:hover {
+            background-color: darken(var(--primary-color), 10%);
+        } */
+
+        /* .text_food {
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      margin: 10px;
+    } */
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="navbar-left">
+                {% if user.is_authenticated %}
+
+                <a href="{% url 'setting' %}"><img src="/media/default.webp" alt="Company Logo" class="logo"></a>
+                {% endif %}
+            </div>
+            <div class="navbar-middle">
+                <a href="#" aria-label="Home">Home</a>
+                <a href="#" aria-label="About Us">About Us</a>
+                <a href="#" aria-label="Products">Products</a>
+                {% if user.is_authenticated %}
+                <p style="color: #000; z-index: 99; display: inline;">welcome,
+                    {{request.user}}</p>
+
+                {% else %}
+                <a href="{% url 'login' %}" aria-label="Products">login</a>
+                {% endif %}
+
+
+            </div>
+            <div class="navbar-right">
+
+            </div>
+        </nav>
+        <div class="container1" aria-label="Container 1">
+            <!-- Container 1 map content will go here -->
+
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2429968.9851966226!2d84.43588446069404!3d28.280566512596714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snp!4v1716439489014!5m2!1sen!2snp"
+                width="1044" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
+        </div>
+        <div class="container mt-3">
+            <div class="search-section">
+                <form action="" method="get">
+                    <input type="text" id="search-input" name="search" list="company-names"
+                        placeholder="Search for a local business through location..." class="form-control">
+                    <div class="bttn" style="display: flex; justify-content: center;">
+                        <button type="submit">search</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row" id="company-list">
+                {% for organization in organizations %}
+
+                <div class="company-card">
+                    <img class="company-logo" src="{{organization.profile_pic.url}}" alt="${company.name} logo">
+                    <h2 class="company-name">{{ organization.name }}</h2>
+                    <p class="company-description">{{ organization.description |truncatechars:200}}</p>
+                    <a href="{% url 'explore' organization.id %}"><button class="explore-btn"
+                            onclick="">Explore</button></a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+        <footer class="footer">
+            <p>&copy; 2024 Company Name. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <div class="modal" id="businessModal" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close-button" id="closeModal">&times;</span>
+            <h2>Add Business</h2>
+
+
+            <form id="businessForm">
+                <label for="businessName">Business Name:</label>
+                <input type="text" id="businessName" name="businessName" required>
+                <label for="businessImage">Business Image URL:</label>
+                <input type="url" id="businessImage" name="businessImage" required>
+                <label for="businessDescription">Business Description:</label>
+                <textarea id="businessDescription" name="businessDescription" required></textarea>
+                <button type="submit">Add Business</button>
+            </form>
+        </div>
+    </div>
+
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
+
+</html>

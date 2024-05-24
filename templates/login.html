@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        :root {
+            --primary-color: #808080;
+
+            --primary-color-dark: #606060;/ Darker shade for hover / --secondary-color: #6c757d;
+            --bg-color: #f8f9fa;
+            --text-color: #343a40;
+        }
+
+        .login-btn:hover {
+            background-color: var(--primary-color-dark);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            display: inline;
+            margin: 0 1rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px var(--secondary-color);
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.5rem;
+
+            /* Added border style */
+            border-radius: 5px;
+            box-sizing: border-box;
+            /* Ensures padding is included in the input's width */
+        }
+
+
+
+        .login-btn {
+            width: 100%;
+            padding: 0.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+
+        .terms {
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .new-to-site {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-logo">Business World</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section class="login-section">
+            <div class="login-container">
+                <h2 class="login-title">Login</h2>
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="login-btn">Sign In</button>
+                    <p class="forgot-password"><a href="#" style="text-decoration: none;">Forgot Password?</a></p>
+                    <p class="terms">By continuing, you agree to MyWebsite's Conditions of Use and Privacy Notice.</p>
+                </form>
+
+                <p class="new-to-site">New to Business World? <a href="{% url 'register' %}"><button
+                            class="create-account-btn">Create
+                            Account</button></a></p>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>© 2022 MyWebsite</p>
+    </footer>
+</body>
+
+</html>

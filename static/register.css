@@ -1,0 +1,139 @@
+/* General styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f7f9fc;
+}
+
+/* Container styles */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    transition: all 0.3s ease-in-out;
+}
+
+.container:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Title styles */
+.container__title {
+    margin: 0 0 20px;
+    font-size: 26px;
+    text-align: center;
+    color: #333333;
+}
+
+/* Form styles */
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__group {
+    margin-bottom: 20px;
+}
+
+.form__label {
+    margin-bottom: 8px;
+    display: block;
+    font-weight: bold;
+    color: #555555;
+}
+
+.form__input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.form__input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.form__submit {
+    padding: 12px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.form__submit:hover {
+    background-color: #0056b3;
+}
+
+/* Dropdown styles */
+.login-dropdown {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.login-dropdown__btn {
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.login-dropdown__btn:hover {
+    background-color: #0056b3;
+}
+
+.login-dropdown__content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    right: 0;
+    width: 180px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.login-dropdown__item {
+    padding: 12px;
+    width: 100%;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.login-dropdown__item:hover {
+    background-color: #f1f1f1;
+}
+
+.login-dropdown:hover .login-dropdown__content {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        margin: 0 10px;
+    }
+}

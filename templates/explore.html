@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Details</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: gray;
+        }
+
+        .logo {
+            align-items: center;
+            align-self: center;
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            margin-bottom: 10px;
+
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            align-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-light bg-light">
+        <a href="{% url 'home' %}
+"><span class="navbar-brand mb-0 h1" id="navbar-company-name">{{organization.user.username}}</span></a>
+    </nav>
+
+    <div class="container mt-3">
+        <div id="company-detail">
+            <div class="card">
+                <div class="card-body"><img class="logo" src="{{organization.profile_pic.url}}" alt="">
+                    <h5>{{organization.name}}</h5>
+                    <p>{{organization.description}}</p>
+                    <p>Location:{{organization.locaiton}}</p>
+                    <p>Industry: 'Local'</p>
+                    <form method="GET" action="">
+                        <button class="btn btn-primary" type="submit" name="send" value="1">Send Request</button>
+                    </form>
+
+
+                </div>
+            </div>'
+        </div>
+    </div>
+    <!-- Include Bootstrap JS -->
+
+</body>
+
+</html>
